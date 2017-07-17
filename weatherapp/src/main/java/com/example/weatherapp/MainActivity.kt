@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
 import org.jetbrains.anko.longToast
@@ -23,19 +24,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        forecast_list.layoutManager = LinearLayoutManager(this)
-//        val forecastList = findViewById(R.id.forecast_list) as RecyclerView
         val forecastList: RecyclerView = find(R.id.forecast_list)
         forecastList.layoutManager = LinearLayoutManager(this)
         forecastList.adapter = ForecastListAdapter(items)
 
-
-        val appKey = "28106fa236db9c77bc653ec81f3a8af1"
-//        val url = "http://samples.openweathermap.org/data/2.5/weather?q=Beijing&appid=$appKey"
-        val url = "http://samples.openweathermap.org/data/2.5/forecast/daily?id=524901&appid=$appKey"
         doAsync {
-            Request(url).run()
-            uiThread { longToast("Request performed") }
+            val execute = ForecastRequest("94043").execute()
+            Log.d(javaClass.simpleName, execute.toString())
+            uiThread { longToast("ForecastRequest performed") }
         }
     }
 }
