@@ -12,7 +12,7 @@ class ForecastRequest(val zipCode: String) {
         private val AppID = "15646a06818f61f7b8d7823ca833e1ce"
         private val WEATHER_URL = "http://api.openweathermap.org/data/2.5/" +
                 "forecast/daily?mode=json&units=metric&cnt=7"
-        private val COMPLETE_URL = "${WEATHER_URL}&APPID=${AppID}&q="
+        private val COMPLETE_URL = "$WEATHER_URL&APPID=$AppID&q="
     }
 
     fun execute(): ForecastResult {

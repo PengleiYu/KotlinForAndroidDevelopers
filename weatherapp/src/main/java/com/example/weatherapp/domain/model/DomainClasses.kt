@@ -1,7 +1,5 @@
 package com.example.weatherapp.domain.model
 
-import com.example.weatherapp.data.City
-
 /**
  * Created by yupenglei on 17/7/17.
  */

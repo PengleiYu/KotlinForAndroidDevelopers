@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.example.weatherapp.R
 import com.example.weatherapp.data.ForecastRequest
+import com.example.weatherapp.domain.command.RequestForecastCommand
 import com.example.weatherapp.ui.adapters.ForecastListAdapter
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
@@ -29,12 +30,15 @@ class MainActivity : AppCompatActivity() {
 
         val forecastList: RecyclerView = find(R.id.forecast_list)
         forecastList.layoutManager = LinearLayoutManager(this)
-        forecastList.adapter = ForecastListAdapter(items)
+//        forecastList.adapter = ForecastListAdapter(items)
 
         doAsync {
-            val execute = ForecastRequest("94043").execute()
-            Log.d(javaClass.simpleName, execute.toString())
-            uiThread { longToast("ForecastRequest performed") }
+            val result = RequestForecastCommand("94043").execute()
+            Log.d(javaClass.simpleName, result.toString())
+            uiThread {
+                forecastList.adapter = ForecastListAdapter(result)
+                longToast("ForecastRequest performed")
+            }
         }
     }
 }
