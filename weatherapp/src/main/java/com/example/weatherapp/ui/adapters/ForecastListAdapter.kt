@@ -11,7 +11,7 @@ import com.example.weatherapp.domain.model.ForecastList
 class ForecastListAdapter(val weekForecast: ForecastList) :
         RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        with(weekForecast.dailyForecast[position]) {
+        with(weekForecast[position]) {
             val value = "$date - $description - $high/$low"
             holder?.textView?.text = value
         }
@@ -21,7 +21,7 @@ class ForecastListAdapter(val weekForecast: ForecastList) :
         return ViewHolder(TextView(parent.context))
     }
 
-    override fun getItemCount(): Int = weekForecast.dailyForecast.size
+    override fun getItemCount(): Int = weekForecast.size()
 
     class ViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
 }
