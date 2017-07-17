@@ -9,10 +9,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.data.ForecastRequest
 import com.example.weatherapp.domain.command.RequestForecastCommand
 import com.example.weatherapp.ui.adapters.ForecastListAdapter
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.find
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.uiThread
+import org.jetbrains.anko.*
 
 class MainActivity : AppCompatActivity() {
     private val items = listOf(
@@ -35,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             val result = RequestForecastCommand("94043").execute()
             Log.d(javaClass.simpleName, result.toString())
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result)
+                //                forecastList.adapter = ForecastListAdapter(result)
                 longToast("ForecastRequest performed")
             }
         }
