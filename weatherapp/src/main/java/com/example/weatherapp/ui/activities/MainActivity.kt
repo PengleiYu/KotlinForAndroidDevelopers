@@ -1,20 +1,17 @@
 package com.example.weatherapp.ui.activities
 
-import android.app.Application
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.example.weatherapp.R
 import com.example.weatherapp.domain.command.RequestForecastCommand
-import com.example.weatherapp.ui.App
 import com.example.weatherapp.ui.adapters.ForecastListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
-import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
     private val items = listOf(
@@ -32,7 +29,6 @@ class MainActivity : AppCompatActivity() {
 
 //        val forecastList: RecyclerView = find(R.id.forecast_list)
         forecast_list.layoutManager = LinearLayoutManager(this)
-
         doAsync {
             val result = RequestForecastCommand("94043").execute()
             Log.d(javaClass.simpleName, result.toString())
