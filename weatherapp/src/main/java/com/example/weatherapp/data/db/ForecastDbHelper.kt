@@ -27,7 +27,9 @@ class ForecastDbHelper(ctx: Context = App.instance)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        db?.dropTable(CityForecastTable.NAME, true)
+        db?.dropTable(DayForecastTable.NAME, true)
+        onCreate(db)
     }
 
     companion object {
