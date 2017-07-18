@@ -9,6 +9,7 @@ import android.widget.TextView
 import com.example.weatherapp.R
 import com.example.weatherapp.domain.model.Forecast
 import com.example.weatherapp.domain.model.ForecastList
+import com.example.weatherapp.ui.utils.ctx
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_forecast.view.*
 
@@ -23,7 +24,7 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Foreca
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_forecast, parent, false)
+        val view = LayoutInflater.from(parent.ctx).inflate(R.layout.item_forecast, parent, false)
         return ViewHolder(view, itemClick)
     }
 
@@ -31,18 +32,13 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Foreca
 
     class ViewHolder(view: View, val itemClick: (Forecast) -> Unit) :
             RecyclerView.ViewHolder(view) {
-        private val iconView: ImageView = view.icon
-        private val dateView: TextView = view.date
-        private val descriptionView: TextView = view.description
-        private val maxTemperatureView: TextView = view.maxTemperature
-        private val minTemperatureView: TextView = view.minTemperature
         fun bindForecast(forecast: Forecast) {
             with(forecast) {
-                Picasso.with(iconView.context).load(iconUrl).into(iconView)
-                dateView.text = date
-                descriptionView.text = description
-                maxTemperatureView.text = high.toString()
-                minTemperatureView.text = low.toString()
+                Picasso.with(itemView.ctx).load(iconUrl).into(itemView.icon)
+                itemView.date.text = date
+                itemView.description.text = description
+                itemView.maxTemperature.text = high.toString()
+                itemView.minTemperature.text = low.toString()
 
                 itemView.setOnClickListener { itemClick(forecast) }
             }
