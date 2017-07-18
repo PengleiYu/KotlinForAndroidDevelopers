@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_forecast.view.*
 /**
  * Created by yupenglei on 17/7/17.
  */
-class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: OnItemClickListener) :
+class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Forecast) -> Unit) :
         RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
@@ -29,7 +29,7 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: OnItemC
 
     override fun getItemCount(): Int = weekForecast.size()
 
-    class ViewHolder(view: View, val itemClick: OnItemClickListener) :
+    class ViewHolder(view: View, val itemClick: (Forecast) -> Unit) :
             RecyclerView.ViewHolder(view) {
         private val iconView: ImageView = view.icon
         private val dateView: TextView = view.date
@@ -47,9 +47,5 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: OnItemC
                 itemView.setOnClickListener { itemClick(forecast) }
             }
         }
-    }
-
-    interface OnItemClickListener {
-        operator fun invoke(forecast: Forecast)
     }
 }

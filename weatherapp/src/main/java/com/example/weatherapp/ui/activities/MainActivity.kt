@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.example.weatherapp.R
-import com.example.weatherapp.data.ForecastRequest
 import com.example.weatherapp.domain.command.RequestForecastCommand
 import com.example.weatherapp.ui.adapters.ForecastListAdapter
 import org.jetbrains.anko.*
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             val result = RequestForecastCommand("94043").execute()
             Log.d(javaClass.simpleName, result.toString())
             uiThread {
-                //                forecastList.adapter = ForecastListAdapter(result)
+                forecastList.adapter = ForecastListAdapter(result) { toast("Hello${it.date}") }
                 longToast("ForecastRequest performed")
             }
         }

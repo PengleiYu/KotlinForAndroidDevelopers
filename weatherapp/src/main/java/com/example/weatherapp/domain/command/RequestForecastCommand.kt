@@ -7,7 +7,7 @@ import com.example.weatherapp.domain.model.ForecastList
 /**
  * Created by yupenglei on 17/7/17.
  */
-class RequestForecastCommand(val zipCode: String) : Command<ForecastList> {
+class RequestForecastCommand(private val zipCode: String) : Command<ForecastList> {
     override fun execute(): ForecastList {
         val forecastRequest = ForecastRequest(zipCode)
         return ForecastDataMapper().convertFromDataModel(forecastRequest.execute())
