@@ -1,7 +1,7 @@
 package com.example.weatherapp.ui
 
 import android.app.Application
-import kotlin.properties.Delegates
+import com.example.weatherapp.ui.utils.DelegateExtension
 
 /**
  * Created by yupenglei on 17/7/18.
@@ -9,9 +9,8 @@ import kotlin.properties.Delegates
 
 class App : Application() {
     companion object {
-        //        private var instance:Application?=null
-//        fun instance()= instance!!
-        var instance: App by Delegates.notNull<App>()
+        //非空单例化
+        var instance by DelegateExtension.notNullSingleValue<App>()
     }
 
     override fun onCreate() {
