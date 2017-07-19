@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 //        val forecastList: RecyclerView = find(R.id.forecast_list)
         forecast_list.layoutManager = LinearLayoutManager(this)
         doAsync {
-            val result = RequestForecastCommand("94043").execute()
+            val result = RequestForecastCommand(94043).execute()
             Log.d(javaClass.simpleName, result.toString())
             uiThread {
                 forecast_list.adapter = ForecastListAdapter(result) { toast("Hello${it.date}") }

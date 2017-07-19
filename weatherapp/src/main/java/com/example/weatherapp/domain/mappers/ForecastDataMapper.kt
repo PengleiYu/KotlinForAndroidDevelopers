@@ -12,8 +12,8 @@ import com.example.weatherapp.domain.model.Forecast as ModelForecast
  * Created by yupenglei on 17/7/17.
  */
 class ForecastDataMapper {
-    fun convertFromDataModel(forecast: ForecastResult): ForecastList {
-        return ForecastList(forecast.city.name, forecast.city.country,
+    fun convertFromDataModel(zipCode: Long, forecast: ForecastResult): ForecastList {
+        return ForecastList(zipCode, forecast.city.name, forecast.city.country,
                 convertForecastListToDomain(forecast.list))
     }
 

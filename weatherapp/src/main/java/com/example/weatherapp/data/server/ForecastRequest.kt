@@ -1,10 +1,13 @@
 package com.example.weatherapp.data.server
 
+import android.util.Log
+import com.google.gson.Gson
+
 
 /**
  * Created by yupenglei on 17/7/17.
  */
-class ForecastRequest(val zipCode: String) {
+class ForecastRequest(val zipCode: Long) {
     companion object {
         private val AppID = "15646a06818f61f7b8d7823ca833e1ce"
         private val WEATHER_URL = "http://api.openweathermap.org/data/2.5/" +
@@ -12,10 +15,10 @@ class ForecastRequest(val zipCode: String) {
         private val COMPLETE_URL = "${com.example.weatherapp.data.server.ForecastRequest.Companion.WEATHER_URL}&APPID=${com.example.weatherapp.data.server.ForecastRequest.Companion.AppID}&q="
     }
 
-    fun execute(): com.example.weatherapp.data.ForecastResult {
-        val url = com.example.weatherapp.data.server.ForecastRequest.Companion.COMPLETE_URL + zipCode
-        android.util.Log.d(javaClass.simpleName, url)
+    fun execute(): ForecastResult {
+        val url = COMPLETE_URL + zipCode
+        Log.d(javaClass.simpleName, url)
         val forecastJsonStr = java.net.URL(url).readText()
-        return com.google.gson.Gson().fromJson(forecastJsonStr, com.example.weatherapp.data.ForecastResult::class.java)
+        return Gson().fromJson(forecastJsonStr, ForecastResult::class.java)
     }
 }
