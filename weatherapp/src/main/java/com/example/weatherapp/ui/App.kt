@@ -1,7 +1,7 @@
 package com.example.weatherapp.ui
 
 import android.app.Application
-import com.example.weatherapp.ui.utils.DelegateExtension
+import com.example.weatherapp.extensions.DelegateExtension
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 

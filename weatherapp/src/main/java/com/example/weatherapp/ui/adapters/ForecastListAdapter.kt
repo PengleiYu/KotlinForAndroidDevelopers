@@ -4,12 +4,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.example.weatherapp.R
 import com.example.weatherapp.domain.model.Forecast
 import com.example.weatherapp.domain.model.ForecastList
-import com.example.weatherapp.ui.utils.ctx
+import com.example.weatherapp.extensions.ctx
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_forecast.view.*
 import java.text.DateFormat
