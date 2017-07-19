@@ -1,6 +1,6 @@
 package com.example.weatherapp.domain.command
 
-import com.example.weatherapp.data.ForecastRequest
+import com.example.weatherapp.data.server.ForecastRequest
 import com.example.weatherapp.domain.mappers.ForecastDataMapper
 import com.example.weatherapp.domain.model.ForecastList
 
