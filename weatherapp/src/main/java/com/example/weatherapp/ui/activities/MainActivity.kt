@@ -3,15 +3,16 @@ package com.example.weatherapp.ui.activities
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import com.example.weatherapp.R
 import com.example.weatherapp.domain.command.RequestForecastCommand
 import com.example.weatherapp.ui.adapters.ForecastListAdapter
+import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
+import java.net.URL
 
 class MainActivity : AppCompatActivity() {
     private val items = listOf(
@@ -30,12 +31,18 @@ class MainActivity : AppCompatActivity() {
 //        val forecastList: RecyclerView = find(R.id.forecast_list)
         forecast_list.layoutManager = LinearLayoutManager(this)
         doAsync {
+            test()
             val result = RequestForecastCommand(94043).execute()
-            Log.d(javaClass.simpleName, result.toString())
+            Logger.d(result.toString())
             uiThread {
                 forecast_list.adapter = ForecastListAdapter(result) { toast("Hello${it.date}") }
                 longToast("ForecastRequest performed")
             }
         }
+    }
+
+    private fun test() {
+        val readText = URL("http://www.baidu.com").readText()
+        Logger.d(readText)
     }
 }

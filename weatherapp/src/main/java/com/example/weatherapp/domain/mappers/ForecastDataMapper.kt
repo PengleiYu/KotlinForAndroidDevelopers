@@ -1,12 +1,9 @@
 package com.example.weatherapp.domain.mappers
 
-import com.example.weatherapp.data.server.Forecast
+import com.example.weatherapp.data.server.ForecastRaw
 import com.example.weatherapp.data.server.ForecastResult
 import com.example.weatherapp.domain.model.ForecastList
-import java.text.DateFormat
-import java.util.*
-
-import com.example.weatherapp.domain.model.Forecast as ModelForecast
+import com.example.weatherapp.domain.model.Forecast
 
 /**
  * Created by yupenglei on 17/7/17.
@@ -17,19 +14,14 @@ class ForecastDataMapper {
                 convertForecastListToDomain(forecast.list))
     }
 
-    private fun convertForecastListToDomain(list: List<Forecast>): List<ModelForecast> {
+    private fun convertForecastListToDomain(list: List<ForecastRaw>): List<Forecast> {
         return list.map { convertForecastItemToDomain(it) }
     }
 
-    private fun convertForecastItemToDomain(forecast: Forecast): ModelForecast {
-        return ModelForecast(convertDate(forecast.dt), forecast.weather[0].description,
+    private fun convertForecastItemToDomain(forecast: ForecastRaw): Forecast {
+        return Forecast(forecast.dt, forecast.weather[0].description,
                 forecast.temp.max.toInt(), forecast.temp.min.toInt(),
                 generateIconUrl(forecast.weather[0].icon))
-    }
-
-    private fun convertDate(date: Long): String {
-        val dateInstance = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
-        return dateInstance.format(date * 1000)
     }
 
     private fun generateIconUrl(iconCode: String)

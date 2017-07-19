@@ -3,7 +3,7 @@ package com.example.weatherapp.data.db
 /**
  * Created by yupenglei on 17/7/18.
  */
-class CityForecast(val map: MutableMap<String, Any?>, val dailyForecast: List<DayForecast>) {
+class CityForecast(map: MutableMap<String, Any?>, val dailyForecast: List<DayForecast>) {
     var _id: Long by map
     var city: String by map
     var country: String by map
@@ -16,7 +16,7 @@ class CityForecast(val map: MutableMap<String, Any?>, val dailyForecast: List<Da
     }
 }
 
-class DayForecast(var map: MutableMap<String, Any?>) {
+class DayForecast(map: MutableMap<String, Any?>) {
     var _id: Long by map
     var date: Long by map
     var description: String by map

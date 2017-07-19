@@ -2,6 +2,7 @@ package com.example.weatherapp.data.server
 
 import android.util.Log
 import com.google.gson.Gson
+import java.net.URL
 
 
 /**
@@ -18,7 +19,7 @@ class ForecastRequest(val zipCode: Long) {
     fun execute(): ForecastResult {
         val url = COMPLETE_URL + zipCode
         Log.d(javaClass.simpleName, url)
-        val forecastJsonStr = java.net.URL(url).readText()
+        val forecastJsonStr = URL(url).readText()
         return Gson().fromJson(forecastJsonStr, ForecastResult::class.java)
     }
 }
