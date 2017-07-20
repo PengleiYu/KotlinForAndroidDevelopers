@@ -1,14 +1,12 @@
-package com.example.weatherapp.domain.mappers
+package com.example.weatherapp.data.server
 
-import com.example.weatherapp.data.server.ForecastRaw
-import com.example.weatherapp.data.server.ForecastResult
-import com.example.weatherapp.domain.model.ForecastList
 import com.example.weatherapp.domain.model.Forecast
+import com.example.weatherapp.domain.model.ForecastList
 
 /**
  * Created by yupenglei on 17/7/17.
  */
-class ForecastDataMapper {
+class ServerDataMapper {
     fun convertFromDataModel(zipCode: Long, forecast: ForecastResult): ForecastList {
         return ForecastList(zipCode, forecast.city.name, forecast.city.country,
                 convertForecastListToDomain(forecast.list))

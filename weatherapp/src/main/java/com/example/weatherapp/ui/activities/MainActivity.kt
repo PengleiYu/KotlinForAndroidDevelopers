@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             Logger.d(result.toString())
             uiThread {
                 forecast_list.adapter = ForecastListAdapter(result) { toast("Hello${it.date}") }
-                longToast("ForecastRequest performed")
+                longToast("ForecastByZipCodeRequest performed")
             }
         }
     }

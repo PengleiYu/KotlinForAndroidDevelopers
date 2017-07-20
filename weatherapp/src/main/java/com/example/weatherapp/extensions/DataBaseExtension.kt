@@ -1,6 +1,7 @@
 package com.example.weatherapp.extensions
 
 import android.database.sqlite.SQLiteDatabase
+import com.orhanobut.logger.Logger
 import org.jetbrains.anko.db.MapRowParser
 import org.jetbrains.anko.db.SelectQueryBuilder
 
@@ -14,7 +15,10 @@ import org.jetbrains.anko.db.SelectQueryBuilder
  */
 fun <T : Any> SelectQueryBuilder.parseList(parser: (Map<String, Any?>) -> T): List<T> =
         parseList(object : MapRowParser<T> {
-            override fun parseRow(columns: Map<String, Any?>): T = parser(columns)
+            override fun parseRow(columns: Map<String, Any?>): T {
+                Logger.e(columns.toString())
+                return parser(columns)
+            }
         })
 
 /**
