@@ -1,11 +1,12 @@
 package com.example.weatherapp.data.server
 
 /**
+ * 此处是从服务端接收到的原始数据
  * Created by yupenglei on 17/7/17.
  */
-data class Coord(val lon: Float, val lat: Float)
+data class Coordinates(val lon: Float, val lat: Float)
 
-data class City(val id: Long, val name: String, val coord: Coord,
+data class City(val id: Long, val name: String, val coordinates: Coordinates,
                 val country: String, val population: Int)
 
 data class Temp(val day: Float, val min: Float, val max: Float, val night: Float,
