@@ -6,6 +6,8 @@ import com.example.weatherapp.ui.App
 import org.jetbrains.anko.db.*
 
 /**
+ * 数据库操作类，注意强大的use函数
+ * 其自动打开数据库对象进行操作
  * Created by yupenglei on 17/7/18.
  */
 class ForecastDbHelper(ctx: Context = App.instance)
