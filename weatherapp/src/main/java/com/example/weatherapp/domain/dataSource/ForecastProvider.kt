@@ -1,6 +1,5 @@
 package com.example.weatherapp.domain.dataSource
 
-import android.util.Log
 import com.example.weatherapp.data.db.ForecastDb
 import com.example.weatherapp.data.server.ForecastServer
 import com.example.weatherapp.domain.model.ForecastList
@@ -20,14 +19,13 @@ class ForecastProvider(val sources: List<ForecastDataSource> = ForecastProvider.
             sources.firstResult { requestSource(it, days, zipCode) }
 
     fun requestSource(source: ForecastDataSource, days: Int, zipCode: Long): ForecastList? {
-        Logger.d("todayTimeSpan=${todayTimeSpan()}")
         val res = source.requestForecastByZipCode(zipCode, todayTimeSpan())
-        Logger.d(res)
+        Logger.d("requestSource: ${source.javaClass.simpleName} => $res\n" +
+                "res.size= ${res?.size()}")
         return if (res != null && res.size() >= days) res else null
     }
 
-    private fun todayTimeSpan(): Long {
-        val time = System.currentTimeMillis()
-        return (time - time % day_in_millis) / 1000
-    }
+    private fun todayTimeSpan(): Long =
+            System.currentTimeMillis() / day_in_millis * day_in_millis
+
 }

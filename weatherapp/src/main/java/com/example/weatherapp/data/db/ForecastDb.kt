@@ -21,7 +21,6 @@ class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.insta
      * 通过zipCode查询城市和每日天气，然后合并成ForecastList
      */
     override fun requestForecastByZipCode(zipCode: Long, date: Long): ForecastList? = forecastDbHelper.use {
-        Logger.d("date=$date")
         val dailyRequest = "${DayForecastTable.CITY_ID}={id} and ${DayForecastTable.DATE} >= {date}"
         //查询指定城市的每日天气列表
         val dailyForecast = select(DayForecastTable.NAME)
@@ -41,6 +40,7 @@ class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.insta
 //                            = CityForecast(HashMap(columns), dailyForecast)
 //                })
                 .parseOpt { CityForecast(HashMap(it), dailyForecast) }//使用扩展函数
+        Logger.d("db request: $zipCode,$date => $cityForecast")
         if (cityForecast != null) dataMapper.convertToDomain(cityForecast) else null
     }
 
@@ -53,7 +53,6 @@ class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.insta
         with(dataMapper.convertFromDomain(forecast)) {
             insert(CityForecastTable.NAME, * map.toVarargArray())
             dailyForecast.forEach {
-                Logger.d(it.map.toVarargArray())
                 insert(DayForecastTable.NAME, *it.map.toVarargArray())
             }
         }

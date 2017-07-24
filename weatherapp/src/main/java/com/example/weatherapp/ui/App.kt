@@ -2,6 +2,7 @@ package com.example.weatherapp.ui
 
 import android.app.Application
 import com.example.weatherapp.extensions.DelegateExtension
+import com.facebook.stetho.Stetho
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 
@@ -17,7 +18,8 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
         Logger.addLogAdapter(AndroidLogAdapter())
+        Stetho.initializeWithDefaults(this)
+        instance = this
     }
 }

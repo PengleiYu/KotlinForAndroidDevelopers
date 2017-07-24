@@ -46,7 +46,7 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Foreca
 
         private fun convertDate(data: Long): String {
             val df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
-            return df.format(data * 1000)
+            return df.format(data)
         }
     }
 }

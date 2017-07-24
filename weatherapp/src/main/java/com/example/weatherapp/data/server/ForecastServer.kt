@@ -13,10 +13,9 @@ class ForecastServer(val dataMapper: ServerDataMapper = ServerDataMapper(),
     override fun requestForecastByZipCode(zipCode: Long, date: Long): ForecastList? {
         //请求网络
         val result: ForecastResult = ForecastByZipCodeRequest(zipCode).execute()
-        Logger.d(result)
+        Logger.d("internet request: $zipCode,$date => $result")
         //转换为待显示的数据
         val forecastList: ForecastList = dataMapper.convertFromDataModel(zipCode, result)
-        Logger.d(forecastList)
         //保存到数据库
         forecastDb.saveForecast(forecastList)
         //从数据库查询
