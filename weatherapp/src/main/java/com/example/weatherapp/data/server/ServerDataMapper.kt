@@ -21,10 +21,9 @@ class ServerDataMapper {
         }
     }
 
-    private fun convertForecastItemToDomain(forecast: ForecastRaw): Forecast {
-        return Forecast(forecast.dt, forecast.weather[0].description,
-                forecast.temp.max.toInt(), forecast.temp.min.toInt(),
-                generateIconUrl(forecast.weather[0].icon))
+    private fun convertForecastItemToDomain(forecast: ForecastRaw): Forecast = with(forecast) {
+        Forecast(-1, dt, weather[0].description, temp.max.toInt(), temp.min.toInt(),
+                generateIconUrl(weather[0].icon))
     }
 
     private fun generateIconUrl(iconCode: String)
