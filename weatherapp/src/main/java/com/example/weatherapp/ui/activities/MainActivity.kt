@@ -28,12 +28,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        val forecastList: RecyclerView = find(R.id.forecast_list)
         forecast_list.layoutManager = LinearLayoutManager(this)
         doAsync {
             test()
             val result = RequestForecastCommand(94043).execute()
-            Logger.d(result.toString())
             uiThread {
                 forecast_list.adapter = ForecastListAdapter(result) { toast("Hello${it.date}") }
                 longToast("ForecastByZipCodeRequest performed")
