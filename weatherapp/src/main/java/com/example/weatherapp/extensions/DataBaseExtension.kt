@@ -1,7 +1,6 @@
 package com.example.weatherapp.extensions
 
 import android.database.sqlite.SQLiteDatabase
-import com.orhanobut.logger.Logger
 import org.jetbrains.anko.db.MapRowParser
 import org.jetbrains.anko.db.SelectQueryBuilder
 
@@ -32,3 +31,8 @@ fun <T : Any> SelectQueryBuilder.parseOpt(parser: (Map<String, Any?>) -> T): T? 
 fun SQLiteDatabase.clear(tableName: String) {
     execSQL("delete from $tableName")
 }
+
+/**
+ * 由于按Id查询比较常见，所以抽取出扩展函数
+ */
+fun SelectQueryBuilder.byId(id: Long): SelectQueryBuilder = whereSimple("_id=?", id.toString())

@@ -2,6 +2,7 @@ package com.example.weatherapp.domain.dataSource
 
 import com.example.weatherapp.data.db.ForecastDb
 import com.example.weatherapp.data.server.ForecastServer
+import com.example.weatherapp.domain.model.Forecast
 import com.example.weatherapp.domain.model.ForecastList
 import com.example.weatherapp.extensions.firstResult
 import com.orhanobut.logger.Logger
@@ -15,15 +16,28 @@ class ForecastProvider(val sources: List<ForecastDataSource> = ForecastProvider.
         val SOURCES = listOf(ForecastDb(), ForecastServer())
     }
 
+    /**
+     * 按zipCode请求
+     */
     fun requestByZipCode(zipCode: Long, days: Int): ForecastList =
-            sources.firstResult { requestSource(it, days, zipCode) }
+            requestToSource {
+                val result = it.requestForecastByZipCode(zipCode, todayTimeSpan())
+                Logger.d("requestSource: ${it.javaClass.simpleName} => $result\n" +
+                        "res.size= ${result?.size()}")
+                if (result != null && result.size() >= days) result else null
+            }
 
-    fun requestSource(source: ForecastDataSource, days: Int, zipCode: Long): ForecastList? {
-        val res = source.requestForecastByZipCode(zipCode, todayTimeSpan())
-        Logger.d("requestSource: ${source.javaClass.simpleName} => $res\n" +
-                "res.size= ${res?.size()}")
-        return if (res != null && res.size() >= days) res else null
-    }
+    /**
+     * 按id查询日天气
+     */
+    fun reqestDayForecast(id: Long): Forecast = requestToSource { it.requestDayForecast(id) }
+
+
+    /**
+     * 由于两个请求都是遍历集合，并返回第一个非null结果，故抽象出新函数
+     */
+    private fun <T : Any> requestToSource(f: (ForecastDataSource) -> T?): T =
+            sources.firstResult(f)
 
     private fun todayTimeSpan(): Long =
             System.currentTimeMillis() / day_in_millis * day_in_millis

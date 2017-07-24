@@ -2,6 +2,7 @@ package com.example.weatherapp.data.server
 
 import com.example.weatherapp.data.db.ForecastDb
 import com.example.weatherapp.domain.dataSource.ForecastDataSource
+import com.example.weatherapp.domain.model.Forecast
 import com.example.weatherapp.domain.model.ForecastList
 import com.orhanobut.logger.Logger
 
@@ -20,5 +21,12 @@ class ForecastServer(val dataMapper: ServerDataMapper = ServerDataMapper(),
         forecastDb.saveForecast(forecastList)
         //从数据库查询
         return forecastDb.requestForecastByZipCode(zipCode, date)
+    }
+
+    /**
+     * 日天气一定能从数据库查出
+     */
+    override fun requestDayForecast(id: Long): Forecast? {
+        throw UnsupportedOperationException()
     }
 }

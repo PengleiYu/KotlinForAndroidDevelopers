@@ -1,11 +1,9 @@
 package com.example.weatherapp.data.db
 
 import com.example.weatherapp.domain.dataSource.ForecastDataSource
+import com.example.weatherapp.domain.model.Forecast
 import com.example.weatherapp.domain.model.ForecastList
-import com.example.weatherapp.extensions.clear
-import com.example.weatherapp.extensions.parseList
-import com.example.weatherapp.extensions.parseOpt
-import com.example.weatherapp.extensions.toVarargArray
+import com.example.weatherapp.extensions.*
 import com.orhanobut.logger.Logger
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
@@ -16,6 +14,13 @@ import org.jetbrains.anko.db.select
  */
 class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.instance,
                  val dataMapper: DbDataMapper = DbDataMapper()) : ForecastDataSource {
+
+    override fun requestDayForecast(id: Long): Forecast? = forecastDbHelper.use {
+        val dayForecast = select(DayForecastTable.NAME)
+                .byId(id)
+                .parseOpt { DayForecast(HashMap(it)) }
+        if (dayForecast != null) dataMapper.convertDayToDomain(dayForecast) else null
+    }
 
     /**
      * 通过zipCode查询城市和每日天气，然后合并成ForecastList
