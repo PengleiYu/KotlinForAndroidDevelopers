@@ -1,5 +1,6 @@
 package com.example.weatherapp.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -8,10 +9,7 @@ import com.example.weatherapp.domain.command.RequestForecastCommand
 import com.example.weatherapp.ui.adapters.ForecastListAdapter
 import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.toast
-import org.jetbrains.anko.uiThread
+import org.jetbrains.anko.*
 import java.net.URL
 
 class MainActivity : AppCompatActivity() {
@@ -33,8 +31,13 @@ class MainActivity : AppCompatActivity() {
             test()
             val result = RequestForecastCommand(94043).execute()
             uiThread {
-                forecast_list.adapter = ForecastListAdapter(result) { toast("Hello${it.date}") }
-                longToast("ForecastByZipCodeRequest performed")
+                forecast_list.adapter = ForecastListAdapter(result) {
+                    startActivity<DetailActivity>(
+                            DetailActivity.ID to it.id,
+                            DetailActivity.CITY_NAME to result.city)
+                }
+                title = "${result.city} (${result.country})"
+                toast("ForecastByZipCodeRequest performed")
             }
         }
     }
