@@ -2,6 +2,7 @@ package com.example.weatherapp.ui.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import com.example.weatherapp.R
 import com.example.weatherapp.extensions.DelegatesExt
 import kotlinx.android.synthetic.main.activity_settings.*
@@ -24,6 +25,15 @@ class SettingsActivity : AppCompatActivity() {
         super.onBackPressed()
         zipCode = cityCode.text.toString().toLong()
     }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean =
+            when (item?.itemId) {
+                android.R.id.home -> {
+                    onBackPressed()
+                    true
+                }
+                else -> false
+            }
 
     companion object {
         val ZIP_CODE = "zipCode"
