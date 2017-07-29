@@ -17,3 +17,17 @@ val View.ctx: Context
 var TextView.textColor: Int
     get() = currentTextColor
     set(v) = setTextColor(v)
+
+/**
+ * 从Y为0处，向上移动到完全隐藏
+ */
+fun View.slideExit() {
+    if (translationY == 0f) animate().translationY(-height.toFloat())
+}
+
+/**
+ * 从上方未完全显示移动到完全显示
+ */
+fun View.slideEnter() {
+    if (translationY < 0f) animate().translationY(0f)
+}
