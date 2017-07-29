@@ -43,5 +43,5 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     //委托
-    var zipCode: Long by DelegateExtension.longPreference(this, ZIP_CODE, DEFAULT_ZIP)
+    var zipCode: Long by DelegateExtension.preference(this, ZIP_CODE, DEFAULT_ZIP)
 }

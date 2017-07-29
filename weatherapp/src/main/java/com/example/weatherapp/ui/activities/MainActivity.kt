@@ -19,7 +19,7 @@ import java.net.URL
 class MainActivity : AppCompatActivity(), ToolbarManager {
     override val toolbar: Toolbar by lazy { find<Toolbar>(R.id.toolbar) }
 
-    var zipCode: Long by DelegateExtension.longPreference(this,
+    var zipCode: Long by DelegateExtension.preference(this,
             SettingsActivity.ZIP_CODE, SettingsActivity.DEFAULT_ZIP)
 
     override fun onCreate(savedInstanceState: Bundle?) {
