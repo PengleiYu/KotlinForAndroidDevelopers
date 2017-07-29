@@ -23,7 +23,9 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        zipCode = cityCode.text.toString().toLong()
+        val strCode = cityCode.text.toString()
+        zipCode = if (strCode.isNullOrEmpty()) DEFAULT_ZIP else strCode.toLong()
+//        zipCode = cityCode.text.toString().toLong()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean =
