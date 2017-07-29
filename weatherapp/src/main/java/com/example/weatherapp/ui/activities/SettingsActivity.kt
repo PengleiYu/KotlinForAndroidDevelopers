@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.example.weatherapp.R
-import com.example.weatherapp.extensions.DelegatesExt
+import com.example.weatherapp.extensions.DelegateExtension
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -43,5 +43,5 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     //委托
-    var zipCode: Long by DelegatesExt.longPreference(this, ZIP_CODE, DEFAULT_ZIP)
+    var zipCode: Long by DelegateExtension.longPreference(this, ZIP_CODE, DEFAULT_ZIP)
 }

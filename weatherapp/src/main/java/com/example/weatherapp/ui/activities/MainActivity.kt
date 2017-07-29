@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import com.example.weatherapp.R
 import com.example.weatherapp.domain.command.RequestForecastCommand
-import com.example.weatherapp.extensions.DelegatesExt
+import com.example.weatherapp.extensions.DelegateExtension
 import com.example.weatherapp.ui.adapters.ForecastListAdapter
 import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,7 +19,7 @@ import java.net.URL
 class MainActivity : AppCompatActivity(), ToolbarManager {
     override val toolbar: Toolbar by lazy { find<Toolbar>(R.id.toolbar) }
 
-    var zipCode: Long by DelegatesExt.longPreference(this,
+    var zipCode: Long by DelegateExtension.longPreference(this,
             SettingsActivity.ZIP_CODE, SettingsActivity.DEFAULT_ZIP)
 
     override fun onCreate(savedInstanceState: Bundle?) {
