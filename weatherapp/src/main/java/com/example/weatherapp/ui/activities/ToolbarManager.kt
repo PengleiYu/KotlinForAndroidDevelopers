@@ -16,8 +16,7 @@ import org.jetbrains.anko.toast
 interface ToolbarManager {
     val toolbar: Toolbar
 
-    var toolbarTitle: String
-        get() = toolbar.title.toString()
+    var toolbarTitle: String get() = toolbar.title.toString()
         set(value) {
             toolbar.title = value
         }
@@ -38,10 +37,7 @@ interface ToolbarManager {
         toolbar.setNavigationOnClickListener { up() }
     }
 
-    private fun createUpDrawable() = with(DrawerArrowDrawable(toolbar.ctx)) {
-        progress = 1f
-        this
-    }
+    private fun createUpDrawable() = DrawerArrowDrawable(toolbar.ctx).apply { progress = 1f }
 
     fun attachToScroll(recycler: RecyclerView) {
         recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
