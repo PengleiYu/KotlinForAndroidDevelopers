@@ -11,7 +11,7 @@ class RequestForecastCommand(val zipCode: Long,
     : Command<ForecastList> {
 
     companion object {
-        val DAYS = 7
+        val DAYS = 15
     }
 
     override fun execute(): ForecastList {
