@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.Toolbar
 import com.example.weatherapp.R
 import com.example.weatherapp.domain.command.RequestForecastCommand
 import com.example.weatherapp.ui.adapters.ForecastListAdapter
@@ -12,7 +13,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.*
 import java.net.URL
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ToolbarManager {
+    override val toolbar: Toolbar by lazy { find<Toolbar>(R.id.toolbar) }
     private val items = listOf(
             "Mon 6/23 - Sunny - 31/17",
             "Tue 6/24 - Foggy - 21/8",
@@ -26,7 +28,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initToolbar()
+
         forecast_list.layoutManager = LinearLayoutManager(this)
+        attachToScroll(forecast_list)
         doAsync {
             test()
             val result = RequestForecastCommand(94043).execute()
@@ -36,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                             DetailActivity.ID to it.id,
                             DetailActivity.CITY_NAME to result.city)
                 }
-                title = "${result.city} (${result.country})"
+                toolbarTitle = "${result.city} (${result.country})"
                 toast("ForecastByZipCodeRequest performed")
             }
         }
