@@ -24,7 +24,8 @@ class ForecastProvider(val sources: List<ForecastDataSource> = ForecastProvider.
                 val result = it.requestForecastByZipCode(zipCode, todayTimeSpan())
                 Logger.d("requestSource: ${it.javaClass.simpleName} => $result\n" +
                         "res.size= ${result?.size()}")
-                if (result != null && result.size() >= days) result else null
+//                if (result != null && result.size() >= days) result else null
+                result?.let { if (result.size() >= days) result else null }
             }
 
     /**

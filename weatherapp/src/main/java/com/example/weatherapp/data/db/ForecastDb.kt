@@ -19,7 +19,8 @@ class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.insta
         val dayForecast = select(DayForecastTable.NAME)
                 .byId(id)
                 .parseOpt { DayForecast(HashMap(it)) }
-        if (dayForecast != null) dataMapper.convertDayToDomain(dayForecast) else null
+//        if (dayForecast != null) dataMapper.convertDayToDomain(dayForecast) else null
+        dayForecast?.let { dataMapper.convertDayToDomain(it) }
     }
 
     /**
@@ -46,7 +47,8 @@ class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.insta
 //                })
                 .parseOpt { CityForecast(HashMap(it), dailyForecast) }//使用扩展函数
         Logger.d("db request: $zipCode,$date => $cityForecast")
-        if (cityForecast != null) dataMapper.convertToDomain(cityForecast) else null
+//        if (cityForecast != null) dataMapper.convertToDomain(cityForecast) else null
+        cityForecast?.let { dataMapper.convertToDomain(cityForecast) }
     }
 
     /**
