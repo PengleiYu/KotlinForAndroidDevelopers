@@ -48,7 +48,7 @@ class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.insta
                 .parseOpt { CityForecast(HashMap(it), dailyForecast) }//使用扩展函数
         Logger.d("db request: $zipCode,$date => $cityForecast")
 //        if (cityForecast != null) dataMapper.convertToDomain(cityForecast) else null
-        cityForecast?.let { dataMapper.convertToDomain(cityForecast) }
+        cityForecast?.let { dataMapper.convertToDomain(it) }
     }
 
     /**

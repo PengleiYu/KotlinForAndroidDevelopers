@@ -25,7 +25,7 @@ class ForecastProvider(val sources: List<ForecastDataSource> = ForecastProvider.
                 Logger.d("requestSource: ${it.javaClass.simpleName} => $result\n" +
                         "res.size= ${result?.size()}")
 //                if (result != null && result.size() >= days) result else null
-                result?.let { if (result.size() >= days) result else null }
+                result?.let { if (it.size() >= days) it else null }
             }
 
     /**
