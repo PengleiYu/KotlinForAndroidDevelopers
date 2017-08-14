@@ -20,9 +20,10 @@ class ForecastByZipCodeRequest(val zipCode: Long) {
     }
 
     fun execute(): ForecastResult {
-        val url = COMPLETE_URL + zipCode
-        Log.d(javaClass.simpleName, url)
-        val forecastJsonStr = URL(url).readText()
-        return Gson().fromJson(forecastJsonStr, ForecastResult::class.java)
+//        val url = COMPLETE_URL + zipCode
+//        Log.d(javaClass.simpleName, url)
+//        val forecastJsonStr = URL(url).readText()
+//        return Gson().fromJson(forecastJsonStr, ForecastResult::class.java)
+        return Api.instance.queryForcastByZipCode(zipCode).execute().body()!!
     }
 }
